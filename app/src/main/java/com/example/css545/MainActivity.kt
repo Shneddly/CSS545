@@ -50,7 +50,10 @@ class MainActivity : ComponentActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val savedSelection = loadSelection()
             runOnUiThread {
-                findViewById<RadioButton>(savedSelection ?: R.id.io_option).isChecked = true
+                val radioButton = findViewById<RadioButton>(savedSelection ?: R.id.io_option)
+                if (radioButton != null) {
+                    radioButton.isChecked = true
+                }
             }
         }
 
