@@ -1,0 +1,102 @@
+Approaches to Storage Management on Android using Android Studio with Kotlin
+
+User Settings, Preferences
+
+    For small amounts of data, such as user preferences, using a set of key value pairs can be enough.
+    This can be stored in a specific preferences file internal to the app, which is accessed and
+    written to with any changes, or it can be stored in data structures contained entirely within
+    the app files. Some of the approaches to preference storage provided by Android are SharedPreferences
+    and DataStore.
+
+    Separate file (SharedPreferences)
+        Pros:
+            Simplicity: the methods used to access, modify, and retrieve data from
+            a preferences file are simple and easy to understand
+            Access: storing preferences in a separate file allows other apps to access
+            the preferences, if needed
+            Persistence: data stored in a file persists across app restarts or device restarts
+        Cons:
+            Limited data management: SharedPreferences file storage has limited management
+            capabilities, only suited for small sets or key value pairs
+            Security: data in this format is often stored in plain text, posing security risks
+
+    Internal Data (DataStore)
+        Pros:
+            Type Safety: DataStore and similar solutions have type safety, reducing type conversion
+            runtime errors
+            Data management: this approach has more robust capabilities, making them better suited
+            for larger and more complex datasets
+            Security: internal data storage can provide better security, especially if encryption
+            is implemented
+            Observability: DataStore allows changes to data to be observed in real time, useful for
+            an app reacting to preference changes
+        Cons:
+            Complexity: this may introduce added complexity compared to a separate file, in some
+            cases unnecessarily for simple use cases
+            Learning curve: DataStore has a steeper learning curve compared to SharedPreferences
+            Overhead: implementing and maintaining internal data structures may need more dev effort
+            Data Loss: If the app is uninstalled, preferences stored internally are lost
+
+General Data Storage
+
+    Larger data, such as large text files, images, or videos, require a different approach than user
+    settings. The approaches for general data storage can be defined as internal storage, external
+    storage, and cloud storage
+
+    Internal Storage:
+        Pros:
+            Security: Internally stored data is private to the app, and cannot be accessed by other apps
+            Speed: Internal access tends to be faster than other approaches due to direct file access
+            Permissions: No permissions are needed to write or read internal storage, simplifying development
+            Persistence: Data stored internally persists even with app or device restarts
+        Cons:
+            Limited Space: Internal storage is limited to a devices internal capacity, which
+            can be restrictive for apps with large storage requirements
+            Data Loss: If an app is uninstalled, any data stored internally is lost
+            Access: Internally stored data is not easily accessible by other apps or devices
+
+    External Storage:
+        Pros:
+            Large Capacity: External storage typically has a larger capacity than internal storage,
+            accommodating apps with larger data requirements
+            Access: External data is easily shared with other apps or devices
+            Accessible to users: External data can be accessed directly by users, giving control and
+            transparency
+            Persistence: External data persists even if the app is uninstalled, reducing data loss risk
+        Cons:
+            Security: External data is vulnerable to unauthorized access
+            Permissions: Writing to external storage requires extra permissions granted by the user,
+            which may affect development and impact the user experience
+            Speed: External access is typically slower than internal access
+
+    Cloud Storage:
+        Pros:
+            Scalable: Cloud storage offers virtually limitless capacity
+            Accessible: Data stored in the cloud is accessible anywhere with an internet connection
+            Data Synchronization: Cloud storage platforms often have synchronization, ensuring consistency
+            across multiple devices
+            Backup and Recovery: Cloud storage offers backup and recovery features, reducing data loss risk
+        Cons:
+            Cost: Cloud storage may have associated costs, which can impact an app's budget or sustainability
+            Internet dependence: Access to data requires internet connection, making the app dependent on networks
+            Security: Cloud storage has security risks, such as data breaches or unauthorized access
+
+
+Application to Projects
+
+For a simple project, such as the homework Basic Storage, there is no need for complex data storage solutions.
+Using internal data structures such as DataStore for preferences, and internal storage of a few small images
+is sufficient.
+
+For our larger project on Food Tourism, data storage is more complex. As we do not currently intend to store much,
+if any, sensitive information, the security aspects of data storage are not of concern. With the basic conception
+of the app, User preferences may be easily stored in a preferences file, for persistence on app removal and reinstall.
+A list of possible suggestions may be saved to external storage, along with images of the suggested place
+and links to a mapping API, using an SQLite format, especially if the user has unreliable internet access.
+Internal storage does not offer much value to the app, as the speed difference between external and internal is
+not relevant to the app's function. Additionally, the data that may be stored by the app may be large, such as images
+of the suggested place, or would need to be shared with other apps, such as a route finding app, both of which would
+benefit from using an external storage approach.
+If the app suggestion process becomes more complex, such as introducing ML recommender systems, or if cross device
+infrastructure is implemented, it may be useful to institute a cloud based account service, with recent or relevant
+suggestions saved to the users device in case of unreliable network access.

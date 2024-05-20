@@ -9,14 +9,38 @@
         android:id="@+id/buttonGoToFirst"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Go to First Page" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Back to Image Selection" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/jupiter" />
+
+
+    <Button
+        android:id="@+id/buttonLoadImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Page 2"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Load Image" />
+
+    <Button
+        android:id="@+id/buttonSaveImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonLoadImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Save Image" />
+
 
 </RelativeLayout>
